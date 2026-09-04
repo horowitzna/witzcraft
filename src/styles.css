@@ -58,6 +58,8 @@ a {
 
 .main {
   flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 /* ------------------------------------------------------ header / footer --- */
@@ -195,6 +197,7 @@ a {
 /* ------------------------------------------------------ patterned band --- */
 
 .patterned {
+  flex: 1 0 auto;
   background-image: url('/images/pattern.jpg');
   background-repeat: repeat;
   background-size: 480px auto;
