@@ -1,31 +1,34 @@
 # WitzCraft — Nate Horowitz portfolio
 
-React + Vite portfolio site, styled to match the original Webflow design.
-
-## Running it locally
-
-```bash
-npm install
-npm run dev
-```
-
-Then open http://localhost:5173
+Mechanical engineering portfolio site. React + Vite, deployed to Azure Static
+Web Apps, served at **witzcraftworks.com**.
 
 ```bash
-npm run build     # production build into dist/
-npm run preview   # serve the built site locally
+npm install     # once
+npm run dev     # http://localhost:5173
 ```
+
+> Always view the site at **http://localhost:5173**. Opening `index.html`
+> directly from the file system shows a blank page — a React app has to be
+> served by the dev server.
+
+## Guides
+
+| Guide | What it covers |
+|---|---|
+| [docs/01-deploy.md](docs/01-deploy.md) | One-time setup: CLIs, GitHub repo, GitHub Actions, Azure Static Web App |
+| [docs/02-daily-workflow.md](docs/02-daily-workflow.md) | The edit → test → push loop, and how to check status |
+| [docs/03-custom-domain.md](docs/03-custom-domain.md) | Buying witzcraftworks.com on Namecheap and pointing it at Azure |
+| [docs/04-managing-your-site.md](docs/04-managing-your-site.md) | **Start here for content.** Adding text, images, case studies, pages; changing layout and design |
 
 ## Editing content
 
-Almost everything lives in **one file**: `src/data/projects.js`.
-
-Each project looks like this:
+Almost everything lives in **one file**: [`src/data/projects.js`](src/data/projects.js).
 
 ```js
 {
   slug: 'carbon-fiber-crank-arms',   // becomes /portfolio/carbon-fiber-crank-arms
-  title: 'Carbon Fiber Crank Arms',  // shown on the tile and detail page
+  title: 'Carbon Fiber Crank Arms',  // tile label + project page banner
   cover: '/images/crank-arms.png',   // tile image
   span: 7,                           // tile width, out of 12 columns
   blurb: 'One-line summary.',
@@ -34,37 +37,77 @@ Each project looks like this:
 }
 ```
 
-- **Add a project** — copy a block, change the fields, done. It appears on the
-  home page and the portfolio page automatically.
-- **Reorder projects** — move the blocks around in the array.
-- **Resize tiles** — change `span`. The numbers in each row should add to 12.
-- **Add images** — drop files into `public/images/` and reference them as
-  `/images/<filename>`.
+- **Add a project** — copy a block, change the fields. It appears on the home
+  page and the portfolio page automatically.
+- **Reorder** — move blocks around in the array.
+- **Resize tiles** — change `span`. The numbers in a row should add to 12.
+- **Add images** — drop files in `public/images/`, reference as `/images/<name>`.
 
-Page text lives in `src/pages/` (`About.jsx`, `Contact.jsx`).
+### Where the other text lives
 
-Colors, fonts and spacing are the CSS variables at the top of `src/styles.css`.
+| Text | File |
+|---|---|
+| Header / footer wordmark, nav labels | [`src/Layout.jsx`](src/Layout.jsx) |
+| Home hero sentence | [`src/pages/Home.jsx`](src/pages/Home.jsx) |
+| About page copy | [`src/pages/About.jsx`](src/pages/About.jsx) |
+| "My Portfolio" banner | [`src/pages/Portfolio.jsx`](src/pages/Portfolio.jsx) |
+| Email, LinkedIn text, school line | [`src/pages/Contact.jsx`](src/pages/Contact.jsx) |
+| Colors, fonts, spacing | CSS variables at the top of [`src/styles.css`](src/styles.css) |
+
+### Two syntax gotchas
+
+**Apostrophes.** In `projects.js` strings are wrapped in single quotes, so an
+apostrophe ends the string early. Use double quotes for that string:
+
+```js
+blurb: "I'm using an apostrophe, so the outer quotes are double.",
+```
+
+**Curly braces and angle brackets.** `{ } < >` are code characters in JSX.
+Don't type them raw into page text — write `&lt;` if you need a `<`.
+
+## Project structure
+
+```
+witzcraft/
+├─ public/
+│  ├─ images/              all site images
+│  └─ pattern.svg          favicon
+├─ src/
+│  ├─ data/projects.js     ← all project content
+│  ├─ pages/               one file per page
+│  ├─ components/Tiles.jsx the clickable image grid
+│  ├─ Layout.jsx           header, footer, nav
+│  └─ styles.css           all styling
+├─ .github/workflows/      GitHub Actions deploy pipeline
+├─ scripts/status.ps1      pipeline status check
+├─ staticwebapp.config.json  Azure routing (SPA fallback)
+└─ docs/                   the guides above
+```
+
+## Commands
+
+```bash
+npm run dev        # dev server with hot reload
+npm run build      # production build into dist/
+npm run preview    # serve the production build locally
+npm run status     # git + GitHub Actions + Azure + live site status
+```
 
 ## Still to do
 
-- `public/images/rocker.png` — the FSAE rocker FEA render. Not yet added; the
-  tile shows a placeholder until it is.
-- `public/images/school-group-work.jpg` — the insulin dispenser photo. Same.
-- The LinkedIn URL in `src/data/projects.js` is a **guess**. Replace it with
-  your real profile URL.
+- `public/images/rocker.png` — FSAE rocker FEA render. Tile shows a placeholder
+  until this exists.
+- `public/images/school-group-work.jpg` — insulin dispenser photo. Same.
+- The LinkedIn URL in `src/data/projects.js` is a **placeholder guess**. Replace
+  it with the real profile URL before publishing.
+- The About page copy is a first draft written from context, not from Nate.
+  Rewrite it.
 
-## Deploying to Azure Static Web Apps
+## Notes
 
-1. Push this folder to a GitHub repository.
-2. Azure Portal → **Create a resource** → **Static Web App**.
-3. Plan type: **Free**.
-4. Under Deployment, choose **GitHub** and pick your repo and branch.
-5. Build presets: **React**, with
-   - App location: `/`
-   - Api location: *(leave blank)*
-   - Output location: `dist`
-6. Create. Azure commits a GitHub Actions workflow to your repo and deploys on
-   every push to that branch.
-
-`staticwebapp.config.json` is already set up so that client-side routes like
-`/about` and `/portfolio/carbon-fiber-crank-arms` resolve correctly on refresh.
+- This folder lives under OneDrive. `node_modules` is gitignored, but OneDrive
+  will still try to sync it. Right-click the folder → *Free up space*, or move
+  the project outside OneDrive if syncing gets slow.
+- `staticwebapp.config.json` makes client-side routes like `/about` survive a
+  browser refresh. Without it Azure returns 404 on refresh — don't delete it.
