@@ -94,7 +94,31 @@ npm run preview    # serve the production build locally
 npm run status     # git + GitHub Actions + Azure + live site status
 ```
 
-## Still to do
+## Current status
+
+Last updated 2026-09-05.
+
+### Setup progress
+
+| Step | State |
+|---|---|
+| Site built and running locally | **Done** — `npm run dev` |
+| Git repo initialised, 3 commits on `main` | **Done** |
+| GitHub CLI 2.100.0 installed | **Done** |
+| Azure CLI 2.90.0 installed | **Done** |
+| `witzcraftworks.com` registered at Namecheap | **Done** |
+| `gh auth login` | **Blocked — Nate must run this** |
+| `az login` | **Blocked — Nate must run this** |
+| GitHub repo created and pushed (**public**) | Waiting on the two logins |
+| Azure Static Web App created | Waiting |
+| Deployment token wired into GitHub secrets | Waiting |
+| First deploy | Waiting |
+| Custom domain DNS records at Namecheap | Waiting on the app existing first |
+
+Next action is [docs/01-deploy.md](docs/01-deploy.md) step 2 — the two sign-ins.
+Everything after that is scriptable.
+
+### Content to do
 
 - `public/images/rocker.png` — FSAE rocker FEA render. Tile shows a placeholder
   until this exists.
@@ -103,6 +127,8 @@ npm run status     # git + GitHub Actions + Azure + live site status
   it with the real profile URL before publishing.
 - The About page copy is a first draft written from context, not from Nate.
   Rewrite it.
+- Several photos in `public/images/` are 2–5 MB straight off a phone. Resize to
+  ~1600 px wide before the site gets much traffic.
 
 ## Notes
 

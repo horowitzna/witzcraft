@@ -13,6 +13,7 @@ Referenced throughout. Change them if you want, but change them everywhere.
 | Setting | Value |
 |---|---|
 | GitHub repo | `witzcraft` |
+| Repo visibility | **Public** (decided 2026-09-05) |
 | Azure resource group | `witzcraft-rg` |
 | Azure Static Web App | `witzcraft` |
 | Azure region | `eastus2` |
@@ -38,9 +39,17 @@ resource without you saying go.
 
 ---
 
-## Step 1 — Install the CLIs
+## Step 1 — Install the CLIs — DONE (2026-09-05)
 
-Two tools: GitHub CLI (`gh`) and Azure CLI (`az`).
+Both are installed and verified:
+
+| Tool | Version | Path |
+|---|---|---|
+| GitHub CLI | 2.100.0 | `C:\Program Files\GitHub CLI\gh.exe` |
+| Azure CLI | 2.90.0 | `C:\Program Files\Microsoft SDKs\Azure\CLI2\wbin\az.cmd` |
+
+<details>
+<summary>How they were installed, if you ever need to redo it</summary>
 
 ```powershell
 winget install --id GitHub.cli -e --accept-source-agreements --accept-package-agreements
@@ -56,7 +65,12 @@ winget install --id Microsoft.AzureCLI -e --accept-source-agreements --accept-pa
 gh --version; az version
 ```
 
-## Step 2 — Log in (you do this)
+</details>
+
+## Step 2 — Log in (you do this) — NEXT ACTION
+
+**Open a new terminal window.** One that was already open before the installs
+won't have `gh` or `az` on its `PATH`.
 
 Run each in your own terminal. Both open a browser.
 
@@ -90,12 +104,16 @@ az account show --query "{name:name, id:id, user:user.name}" -o table
 
 ## Step 3 — Create the GitHub repo and push
 
-From the project folder. `--public` makes it visible to anyone — use
-`--private` if you'd rather keep it closed (the site is public either way).
+From the project folder.
 
 ```bash
 gh repo create witzcraft --public --source=. --remote=origin --push
 ```
+
+> **Public was chosen deliberately.** Everything in `public/images/` becomes
+> browsable by anyone, including screenshots the site doesn't currently display.
+> Reversible with `gh repo edit --visibility private --accept-visibility-change-consequences`
+> if any of that turns out to be lab-confidential.
 
 That creates the repo, sets `origin`, and pushes `main` in one shot. Verify:
 

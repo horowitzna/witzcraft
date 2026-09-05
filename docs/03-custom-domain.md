@@ -8,9 +8,11 @@ Do [01-deploy.md](01-deploy.md) first. You need a working
 
 ## What this costs
 
+Registration is already paid. Nothing below this line costs anything further.
+
 | Item | Cost |
 |---|---|
-| `.com` registration at Namecheap | roughly **$10–16** for year one |
+| `.com` registration at Namecheap | paid — roughly **$10–16** for year one |
 | ICANN fee | $0.18/yr |
 | Domain privacy (WHOIS protection) | free, included, **keep it on** |
 | Azure custom domain (2 of them) | free on the Free plan |
@@ -23,7 +25,7 @@ check the renewal price before you buy, not the headline price.
 
 | Step | Who |
 |---|---|
-| Buy the domain | **You.** Claude can't enter payment details. |
+| ~~Buy the domain~~ | Done 2026-09-05 |
 | Register the hostnames with Azure, fetch the validation token | Claude |
 | Add the DNS records at Namecheap | **You**, in the Namecheap dashboard |
 | Poll validation and confirm it's live | Claude |
@@ -35,21 +37,24 @@ check the renewal price before you buy, not the headline price.
 
 ---
 
-## Step 1 — Buy the domain (you)
+## Step 1 — Buy the domain — DONE (2026-09-05)
 
-1. Go to [namecheap.com](https://www.namecheap.com) and search `witzcraftworks.com`.
-2. Add to cart. **Check the renewal price**, not just year one.
-3. At checkout, **decline every upsell** — hosting, email, PremiumDNS, SSL.
-   Azure gives you SSL free, and you don't need their DNS or hosting.
-4. Leave **Domain Privacy on** (free, and keeps your home address out of public
-   WHOIS records).
-5. Complete the purchase.
+`witzcraftworks.com` is registered at Namecheap.
 
-Then confirm the DNS is Namecheap's own:
+Two things to check in the Namecheap dashboard before going further:
 
-**Domain List → Manage → Nameservers** should read **Namecheap BasicDNS**. If it
-says Custom DNS or anything else, switch it to Namecheap BasicDNS. ALIAS records
-only work on Namecheap's own DNS.
+**Nameservers.** Domain List → Manage → **Nameservers** must read
+**Namecheap BasicDNS**. If it says Custom DNS or anything else, change it —
+ALIAS records only exist on Namecheap's own DNS, and the apex domain won't work
+without one.
+
+**Domain Privacy.** Domain List → Manage → **Domain Privacy** should be on. It's
+free with Namecheap and keeps your home address out of public WHOIS records.
+Worth confirming rather than assuming.
+
+While you're there, decide about **auto-renew**. On means you keep the domain
+without thinking about it; off means it silently expires and someone else can
+register it. For a portfolio you'll put on a résumé, leave it on.
 
 ## Step 2 — Clear the parking records (you)
 
