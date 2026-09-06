@@ -20,7 +20,7 @@ export default function Contact() {
           <dt>LinkedIn</dt>
           <dd>
             <a href={linkedIn.href} target="_blank" rel="noreferrer">
-              linkedin.com/in/nathan-horowitz
+              linkedin.com/in/nate-horowitz-99ba1436a
             </a>
           </dd>
 

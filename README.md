@@ -136,8 +136,8 @@ az group update -n witzcraft-rg --tags "Owner=..." "Cost Center=..." "IaC manage
 - `public/images/rocker.png` — FSAE rocker FEA render. Tile shows a placeholder
   until this exists.
 - `public/images/school-group-work.jpg` — insulin dispenser photo. Same.
-- The LinkedIn URL in `src/data/projects.js` is a **placeholder guess**. Replace
-  it with the real profile URL before publishing.
+- ~~The LinkedIn URL is a placeholder guess.~~ Fixed 2026-09-05 to
+  `linkedin.com/in/nate-horowitz-99ba1436a`.
 - The About page copy is a first draft written from context, not from Nate.
   Rewrite it.
 - Several photos in `public/images/` are 2–5 MB straight off a phone. Resize to

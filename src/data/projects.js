@@ -90,7 +90,7 @@ export const projects = [
 
 // External tile shown alongside the projects on the home page.
 export const linkedIn = {
-  href: 'https://www.linkedin.com/in/nathan-horowitz',
+  href: 'https://www.linkedin.com/in/nate-horowitz-99ba1436a/',
   span: 4,
 }
 
