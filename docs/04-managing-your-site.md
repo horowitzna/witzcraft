@@ -275,12 +275,23 @@ grab new ones from any color picker.
 here:
 
 ```css
---font-head: 'Montserrat', system-ui, sans-serif;   /* nav, tile labels, headings */
---font-body: 'Lato', system-ui, sans-serif;         /* paragraphs, hero */
+--font-head: 'Della Respira', Georgia, serif;   /* nav, tile labels, headings */
+--font-body: 'Della Respira', Georgia, serif;   /* paragraphs, hero */
 ```
 
 To swap: pick fonts at [fonts.google.com](https://fonts.google.com), replace the
 `<link>` in `index.html`, update these two variables.
+
+**Check the weights before you commit to a font.** Della Respira ships in
+exactly one style — regular 400. There is no bold and no italic. That's why
+nothing in `styles.css` uses `font-weight: 700`, and why the site builds
+hierarchy from **size, letter-spacing, uppercase and color** instead. The active
+nav item is marked with an underline rather than bold, for the same reason.
+
+`font-synthesis: style` at the top of the file lets browsers slant a faux italic
+but blocks faux bold — a fake bold smears the glyphs and looks broken on a serif
+this fine. If you switch to a font with real bold weights, you can drop that
+rule and start using `font-weight` again.
 
 **The background pattern** is `public/images/pattern.jpg`. Replace the file to
 change it — it must be a seamlessly tiling image. Its scale:
