@@ -8,7 +8,8 @@ export default function Contact() {
       <div className="card card--prose">
         <h1 className="prose__title">Contact</h1>
         <p className="prose__lead">
-          Looking for a co-op student, or want to talk about a project? Reach out.
+          Want to learn more about what I've done or have a prospective opportunity
+          for me? Reach out.
         </p>
 
         <dl className="contact">

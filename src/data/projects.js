@@ -101,6 +101,10 @@ export const projects = [
         caption: 'Fully printed version 2 with clamps. Printed with ASA filament',
       },
       {
+        src: '/images/nac-the-finished-adjustable-headrest.jpg',
+        caption: 'The finished adjustable headrest on a recumbent bike',
+      },
+      {
         src: '/images/nac-custom-foam-for-the-offroad-handcycle-mako.jpg',
         caption: "Custom foam for the offroad handcycle 'Mako.'",
       },

@@ -36,7 +36,7 @@ you're looking for.
 
 One sentence, above your email and LinkedIn.
 
->
+>Want to learn more about what I've done or have a prospective opportunity for me? Reach out.
 
 
 ---
