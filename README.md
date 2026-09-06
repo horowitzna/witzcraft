@@ -12,6 +12,54 @@ npm run dev     # http://localhost:5173
 > directly from the file system shows a blank page — a React app has to be
 > served by the dev server.
 
+## The workflow — change it, check it, ship it
+
+Four steps. Full detail in [docs/02-daily-workflow.md](docs/02-daily-workflow.md).
+
+**1. Start the dev server** and leave it running. Every save reloads the browser.
+
+```bash
+npm run dev
+```
+
+**2. Make your change.** Content lives in `src/data/projects.js`; page text is in
+`src/pages/`. Watch http://localhost:5173 as you save.
+
+**3. Verify the real build.** Hot reload is not the same thing as the production
+build — this is the step that catches what would otherwise fail in the cloud.
+
+```bash
+npm run build
+```
+
+If that errors, fix it before pushing. A broken build never reaches the live
+site, but you'll waste a round trip finding out.
+
+**4. Ship it.** Pushing to `main` is what deploys.
+
+```bash
+git add -A && git commit -m "describe your change" && git push
+```
+
+Live in about 90 seconds. Watch it land:
+
+```bash
+gh run watch
+```
+
+Then confirm everything is healthy end to end:
+
+```bash
+npm run status
+```
+
+If something goes wrong after it's live, this reverses the last change and
+redeploys — it's safe, it adds a new commit rather than erasing history:
+
+```bash
+git revert HEAD && git push
+```
+
 ## Guides
 
 | Guide | What it covers |
