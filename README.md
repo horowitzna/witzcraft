@@ -64,6 +64,7 @@ git revert HEAD && git push
 
 | Guide | What it covers |
 |---|---|
+| [docs/05-how-it-all-works.md](docs/05-how-it-all-works.md) | **New to this? Read this first.** Plain-English explanation of GitHub, Azure and Namecheap, and where to check things |
 | [docs/01-deploy.md](docs/01-deploy.md) | One-time setup: CLIs, GitHub repo, GitHub Actions, Azure Static Web App |
 | [docs/02-daily-workflow.md](docs/02-daily-workflow.md) | The edit → test → push loop, and how to check status |
 | [docs/03-custom-domain.md](docs/03-custom-domain.md) | Buying witzcraftworks.com on Namecheap and pointing it at Azure |
