@@ -6,6 +6,34 @@ serve the site, over HTTPS, with a certificate Azure renews for free.
 Do [01-deploy.md](01-deploy.md) first. You need a working
 `*.azurestaticapps.net` site before a custom domain can point at anything.
 
+---
+
+## DONE — 2026-09-05
+
+This was completed. Kept below as reference for redoing it or adding another
+domain. The records that are live at Namecheap:
+
+| Type | Host | Value |
+|---|---|---|
+| `TXT` | `@` | `_um368y2nqzkle7ko5p63taf9gb3bw0f` |
+| `ALIAS` | `@` | `brave-sky-01ff4d80f.5.azurestaticapps.net` |
+| `CNAME` | `www` | `brave-sky-01ff4d80f.5.azurestaticapps.net` |
+
+**Ordering gotcha worth remembering.** The apex and `www` register in opposite
+orders:
+
+- **Apex** — register with Azure *first* (`--validation-method dns-txt-token`),
+  which generates the token, *then* add the TXT and ALIAS records.
+- **`www`** — add the CNAME record *first*, *then* register with Azure. Trying it
+  the other way returns
+  `BadRequest: CNAME Record is invalid. Please ensure the CNAME record has been created.`
+
+Namecheap also ships an SPF TXT record on the apex
+(`v=spf1 include:spf.efwd.registrar-servers.com ~all`). Leave it — multiple TXT
+records on `@` coexist fine and Azure only looks for its own token.
+
+---
+
 ## What this costs
 
 Registration is already paid. Nothing below this line costs anything further.

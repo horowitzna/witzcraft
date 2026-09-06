@@ -96,27 +96,40 @@ npm run status     # git + GitHub Actions + Azure + live site status
 
 ## Current status
 
-Last updated 2026-09-05.
+**The site is live at https://witzcraftworks.com** — deployed, on HTTPS, with a
+free auto-renewing certificate. Last updated 2026-09-05.
 
-### Setup progress
+### Live resources
 
-| Step | State |
+| Thing | Value |
 |---|---|
-| Site built and running locally | **Done** — `npm run dev` |
-| Git repo initialised, 3 commits on `main` | **Done** |
-| GitHub CLI 2.100.0 installed | **Done** |
-| Azure CLI 2.90.0 installed | **Done** |
-| `witzcraftworks.com` registered at Namecheap | **Done** |
-| `gh auth login` | **Blocked — Nate must run this** |
-| `az login` | **Blocked — Nate must run this** |
-| GitHub repo created and pushed (**public**) | Waiting on the two logins |
-| Azure Static Web App created | Waiting |
-| Deployment token wired into GitHub secrets | Waiting |
-| First deploy | Waiting |
-| Custom domain DNS records at Namecheap | Waiting on the app existing first |
+| Public URL | https://witzcraftworks.com |
+| Azure default URL | https://brave-sky-01ff4d80f.5.azurestaticapps.net |
+| GitHub repo | [horowitzna/witzcraft](https://github.com/horowitzna/witzcraft) (public) |
+| Azure Static Web App | `witzcraft` in `witzcraft-rg`, East US 2, Free plan |
+| Azure account | `horowitz.na@northeastern.edu`, "Azure subscription 1" |
+| Deploy trigger | Every push to `main` |
 
-Next action is [docs/01-deploy.md](docs/01-deploy.md) step 2 — the two sign-ins.
-Everything after that is scriptable.
+Custom domain status: apex **Ready**, `www` validating at time of writing.
+Check with `npm run status`.
+
+### Northeastern tenant policy
+
+The NU Azure tenant enforces a tagging policy (`nuroot-tagging-initiative`).
+Every resource group must carry `Owner`, `Cost Center`, and `IaC managed` tags
+or creation is denied. Current values:
+
+| Tag | Value |
+|---|---|
+| `Owner` | `horowitz.na@northeastern.edu` |
+| `Cost Center` | `Student-Personal` — **placeholder**, correct it if NU issues you a real one |
+| `IaC managed` | `horowitzna/witzcraft` |
+
+Change with:
+
+```bash
+az group update -n witzcraft-rg --tags "Owner=..." "Cost Center=..." "IaC managed=..."
+```
 
 ### Content to do
 
