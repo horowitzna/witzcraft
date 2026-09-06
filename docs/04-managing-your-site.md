@@ -349,7 +349,7 @@ Unless you know what you're doing, or you're asking Claude to:
 
 | File | Why |
 |---|---|
-| `staticwebapp.config.json` | Makes `/about` survive a refresh. Delete it and deep links 404 on the live site. |
+| `public/staticwebapp.config.json` | Makes `/about` survive a refresh. Must stay in `public/` so it gets copied into `dist/`. Delete or move it and deep links 404 on the live site. |
 | `.github/workflows/` | The deploy pipeline. |
 | `package.json` / `package-lock.json` | Dependency versions. Use `npm install <thing>` instead of editing by hand. |
 | `node_modules/` | Generated. Never edit, never commit. |

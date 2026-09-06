@@ -220,8 +220,14 @@ file and line.
 **Deploy succeeds but the site is blank** — `output_location` in the workflow
 must be `dist` (Vite's output), not `build`.
 
-**404 when refreshing on `/about`** — `staticwebapp.config.json` must be in the
-repo root and get copied into the deploy. Confirm it's committed.
+**404 when refreshing on `/about`** — `staticwebapp.config.json` must be in
+`public/`, not the repo root. Vite copies `public/` into `dist/`, and `dist/` is
+what Azure deploys. Confirm with `ls dist/staticwebapp.config.json` after a build.
+
+**Site loads but is blank, console says "MIME type application/octet-stream"** —
+the workflow deployed the repo root instead of the build. With
+`skip_app_build: true` the action treats `app_location` as the content root and
+ignores `output_location`, so `app_location` must be `dist`.
 
 **Wrong Azure subscription** — `az account set --subscription "..."`, then
 delete the misplaced resource group with

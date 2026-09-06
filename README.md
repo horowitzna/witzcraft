@@ -72,7 +72,8 @@ Don't type them raw into page text — write `&lt;` if you need a `<`.
 witzcraft/
 ├─ public/
 │  ├─ images/              all site images
-│  └─ pattern.svg          favicon
+│  ├─ pattern.svg          favicon
+│  └─ staticwebapp.config.json  Azure routing (SPA fallback)
 ├─ src/
 │  ├─ data/projects.js     ← all project content
 │  ├─ pages/               one file per page
@@ -81,7 +82,6 @@ witzcraft/
 │  └─ styles.css           all styling
 ├─ .github/workflows/      GitHub Actions deploy pipeline
 ├─ scripts/status.ps1      pipeline status check
-├─ staticwebapp.config.json  Azure routing (SPA fallback)
 └─ docs/                   the guides above
 ```
 
@@ -135,5 +135,7 @@ Everything after that is scriptable.
 - This folder lives under OneDrive. `node_modules` is gitignored, but OneDrive
   will still try to sync it. Right-click the folder → *Free up space*, or move
   the project outside OneDrive if syncing gets slow.
-- `staticwebapp.config.json` makes client-side routes like `/about` survive a
-  browser refresh. Without it Azure returns 404 on refresh — don't delete it.
+- `public/staticwebapp.config.json` makes client-side routes like `/about`
+  survive a browser refresh. It lives in `public/` so Vite copies it into
+  `dist/`, which is what Azure actually deploys. Without it Azure returns 404 on
+  refresh — don't delete it or move it back to the project root.
