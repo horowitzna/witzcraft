@@ -11,7 +11,12 @@ export default function Project() {
   return (
     <>
       <section className="hero hero--short">
-        <img className="hero__bg" src={project.cover} alt="" />
+        <img
+          className="hero__bg"
+          src={project.banner || project.cover}
+          style={project.bannerPosition ? { objectPosition: project.bannerPosition } : undefined}
+          alt=""
+        />
         <div className="hero__band">
           <h1 className="hero__title">{project.title}</h1>
         </div>

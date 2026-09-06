@@ -12,6 +12,14 @@ export const projects = [
     slug: 'carbon-fiber-crank-arms',
     title: 'Carbon Fiber Crank Arms',
     cover: '/images/crank-arms.png',
+    // Optional. Background for the banner at the top of the project page.
+    // Falls back to `cover` when absent — set it when a wider photo crops
+    // better into the short banner than the tile image does.
+    banner: '/images/crank-the-crank-undergoing-vacuum-consolidation.jpg',
+    // Which part of the banner image to keep when it's cropped to the wide
+    // band. "50% 43%" keeps the crank itself centred instead of the empty
+    // bagging below it. Any CSS object-position value works.
+    bannerPosition: '50% 43%',
     // How many of the 12 grid columns this tile takes on the home page.
     span: 7,
     body: [
