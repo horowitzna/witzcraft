@@ -386,6 +386,17 @@ a {
 
 /* ------------------------------------------------------------- gallery --- */
 
+.prose__links {
+  list-style: none;
+  margin: 28px 0 0;
+  padding: 0;
+  font-size: 19px;
+}
+
+.prose__links li {
+  margin-bottom: 8px;
+}
+
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));

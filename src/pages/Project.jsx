@@ -23,17 +23,34 @@ export default function Project() {
             &larr; Back to portfolio
           </Link>
 
-          <p className="prose__lead">{project.blurb}</p>
+          {project.blurb && <p className="prose__lead">{project.blurb}</p>}
+
           {project.body.map((paragraph, i) => (
             <p key={i}>{paragraph}</p>
           ))}
 
+          {project.links?.length > 0 && (
+            <ul className="prose__links">
+              {project.links.map((link) => (
+                <li key={link.href}>
+                  <a href={link.href} target="_blank" rel="noreferrer">
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
+
           {project.gallery.length > 0 && (
             <div className="gallery">
-              {project.gallery.map((item) => (
+              {project.gallery.map((item, i) => (
                 <figure className="gallery__item" key={item.src}>
-                  <img src={item.src} alt={item.caption} loading="lazy" />
-                  <figcaption>{item.caption}</figcaption>
+                  <img
+                    src={item.src}
+                    alt={item.caption || `${project.title} — image ${i + 1}`}
+                    loading="lazy"
+                  />
+                  {item.caption && <figcaption>{item.caption}</figcaption>}
                 </figure>
               ))}
             </div>
