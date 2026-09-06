@@ -16,17 +16,11 @@
   --page-max: 1180px;
   --radius: 14px;
 
-  /* Della Respira ships in exactly one style: regular 400. No bold, no italic.
-     Hierarchy throughout this file is therefore built from size, letter-spacing
-     and color rather than weight. font-synthesis: style permits a slanted faux
-     italic (there is no real one) while blocking faux bold, which would smear
-     the glyphs and look broken on a serif this delicate. */
-  --font-head: 'Della Respira', Georgia, serif;
-  --font-body: 'Della Respira', Georgia, serif;
-}
-
-* {
-  font-synthesis: style;
+  /* Cormorant Garamond ships 400-700 plus a true italic, so real weights are
+     back in play. It has a small x-height for its point size, so body copy is
+     set a little larger than you would set most serifs. */
+  --font-head: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Cormorant Garamond', Georgia, serif;
 }
 
 *,
@@ -108,9 +102,9 @@ a {
 
 .brand--bold {
   font-family: var(--font-head);
-  font-weight: 400;
-  font-size: 27px;
-  letter-spacing: 0.03em;
+  font-weight: 700;
+  font-size: 28px;
+  letter-spacing: 0.02em;
 }
 
 .nav {
@@ -122,8 +116,8 @@ a {
 
 .nav__link {
   font-family: var(--font-head);
-  font-size: 14px;
-  font-weight: 400;
+  font-size: 15px;
+  font-weight: 500;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.75);
@@ -136,16 +130,17 @@ a {
   color: #fff;
 }
 
-/* No bold available, so the active page is marked with a rule beneath it. */
+/* Bold plus a rule beneath — the rule alone reads faintly at this size. */
 .nav__link.active {
   color: #fff;
+  font-weight: 700;
   border-bottom-color: rgba(255, 255, 255, 0.85);
 }
 
 .nav__cta {
   font-family: var(--font-head);
-  font-size: 14px;
-  font-weight: 400;
+  font-size: 15px;
+  font-weight: 500;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: #fff;
@@ -194,8 +189,8 @@ a {
   padding: 0 28px;
   color: #fff;
   font-weight: 400;
-  font-size: clamp(22px, 3.2vw, 42px);
-  line-height: 1.24;
+  font-size: clamp(26px, 3.7vw, 48px);
+  line-height: 1.22;
   text-align: center;
   text-shadow: 0 1px 12px rgba(0, 0, 0, 0.3);
 }
@@ -273,9 +268,9 @@ a {
   background: var(--label);
   color: #fff;
   font-family: var(--font-head);
-  font-weight: 400;
-  font-size: clamp(14px, 1.4vw, 20px);
-  letter-spacing: 0.07em;
+  font-weight: 700;
+  font-size: clamp(15px, 1.5vw, 21px);
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   line-height: 1.3;
   padding: 13px 18px;
@@ -323,30 +318,32 @@ a {
 
 .prose__title {
   font-family: var(--font-head);
-  font-weight: 400;
-  font-size: clamp(30px, 3.4vw, 42px);
+  font-weight: 700;
+  font-size: clamp(32px, 3.6vw, 44px);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.05em;
   color: var(--ink);
   margin: 0 0 26px;
 }
 
+/* Cormorant's small x-height means 18px reads like ~15px in a humanist sans.
+   Body copy is bumped accordingly. */
 .card--prose p {
-  font-size: 18px;
-  line-height: 1.72;
+  font-size: 21px;
+  line-height: 1.68;
   margin: 0 0 20px;
 }
 
 .prose__lead {
-  font-size: 20px !important;
+  font-size: 24px !important;
   color: var(--ink);
 }
 
 .backlink {
   display: inline-block;
   font-family: var(--font-head);
-  font-size: 14px;
-  font-weight: 400;
+  font-size: 15px;
+  font-weight: 600;
   letter-spacing: 0.13em;
   text-transform: uppercase;
   color: var(--green);
@@ -367,20 +364,20 @@ a {
 
 .contact {
   display: grid;
-  grid-template-columns: 150px 1fr;
+  grid-template-columns: 160px 1fr;
   gap: 14px 20px;
   margin: 30px 0 0;
-  font-size: 18px;
+  font-size: 21px;
 }
 
 .contact dt {
   font-family: var(--font-head);
-  font-weight: 400;
-  font-size: 14px;
+  font-weight: 600;
+  font-size: 15px;
   letter-spacing: 0.13em;
   text-transform: uppercase;
   color: var(--muted);
-  padding-top: 4px;
+  padding-top: 6px;
 }
 
 .contact dd {
