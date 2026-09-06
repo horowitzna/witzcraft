@@ -11,7 +11,7 @@ export const projects = [
   {
     slug: 'carbon-fiber-crank-arms',
     title: 'Carbon Fiber Crank Arms',
-    cover: '/images/crank-arms.png',
+    cover: '/images/crank-the-working-prototype-on-a-handcycle.jpg',
     // Optional. Background for the banner at the top of the project page.
     // Falls back to `cover` when absent — set it when a wider photo crops
     // better into the short banner than the tile image does.
@@ -41,6 +41,10 @@ export const projects = [
         caption: 'The crank undergoing vacuum consolidation',
       },
       { src: '/images/crank-it-weighed-only-87-grams.jpg', caption: 'It weighed only 87 grams' },
+      {
+        src: '/images/crank-the-working-prototype-on-a-handcycle.jpg',
+        caption: 'The working crank arm prototype on an adaptive off-road handcycle',
+      },
     ],
   },
   {

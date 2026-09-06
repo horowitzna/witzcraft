@@ -27,7 +27,7 @@ Engineering Student at Northeastern University."
 However many paragraphs you want. Who you are, what you like building, what
 you're looking for.
 
->
+> I am Nathan (Nate) Horowitz, a 2nd year mechanical engineering student at Northeastern University. I aim to channel my passion for design and thoughtfull engineering into becoming a successfull engineer. I am on the Northeastern Electric Racing team, an FSAE team, where I do work for vehicle dynamics and powertrain. This past summer I had the oppurtunity to intern at the National Ability Center's new Innovation Lab, where I engineering and prototyped products to expand the National Ability Center's adaptive sports equipment, mainly bikes. <br>   Outside of engineering, I love to get outside into nature, and do things like Mountain Bike and Cross-Country ski. I grew up in Salt Lake City, Utah, but spend most of my time in Boston.
 
 
 ---
