@@ -7,6 +7,10 @@
 
 $ErrorActionPreference = 'Continue'
 
+# Windows PowerShell 5.1 negotiates TLS 1.0 by default, which Azure refuses.
+# Without this every https probe below fails with a misleading "unreachable".
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
 $APP    = 'witzcraft'
 $GROUP  = 'witzcraft-rg'
 $DOMAIN = 'witzcraftworks.com'
@@ -21,9 +25,23 @@ function Warn($text) { Write-Host "   [warn] $text" -ForegroundColor Yellow }
 function Bad($text)  { Write-Host "   [FAIL] $text" -ForegroundColor Red }
 function Info($text) { Write-Host "          $text" -ForegroundColor DarkGray }
 
-function Have($name) {
-    return [bool](Get-Command $name -ErrorAction SilentlyContinue)
+# Resolve a CLI by name, falling back to its default install location. A shell
+# opened before the CLIs were installed won't have them on PATH yet.
+$Fallbacks = @{
+    'gh' = 'C:\Program Files\GitHub CLI\gh.exe'
+    'az' = 'C:\Program Files\Microsoft SDKs\Azure\CLI2\wbin\az.cmd'
 }
+
+function Resolve-Cli($name) {
+    $cmd = Get-Command $name -ErrorAction SilentlyContinue
+    if ($cmd) { return $cmd.Source }
+    $fb = $Fallbacks[$name]
+    if ($fb -and (Test-Path $fb)) { return $fb }
+    return $null
+}
+
+$GH = Resolve-Cli 'gh'
+$AZ = Resolve-Cli 'az'
 
 # --------------------------------------------------------------------- local --
 Head 'Local working tree'
@@ -60,14 +78,14 @@ if ($?) {
 # ------------------------------------------------------------------- actions --
 Head 'GitHub Actions'
 
-if (-not (Have 'gh')) {
+if (-not $GH) {
     Warn 'gh not installed - see docs/01-deploy.md step 1'
 } else {
-    gh auth status *> $null
+    & $GH auth status *> $null
     if (-not $?) {
         Warn "Not logged in - run 'gh auth login'"
     } else {
-        $runs = gh run list --limit 3 --json displayTitle,status,conclusion,createdAt 2>$null | ConvertFrom-Json
+        $runs = & $GH run list --limit 3 --json displayTitle,status,conclusion,createdAt 2>$null | ConvertFrom-Json
         if (-not $runs -or $runs.Count -eq 0) {
             Warn 'No workflow runs yet'
         } else {
@@ -93,21 +111,21 @@ Head 'Azure Static Web App'
 
 $target = $null
 
-if (-not (Have 'az')) {
+if (-not $AZ) {
     Warn 'az not installed - see docs/01-deploy.md step 1'
 } else {
-    $acct = az account show --query "name" -o tsv 2>$null
+    $acct = & $AZ account show --query "name" -o tsv 2>$null
     if (-not $acct) {
         Warn "Not logged in - run 'az login'"
     } else {
         Info "Subscription: $acct"
-        $target = az staticwebapp show -n $APP -g $GROUP --query "defaultHostname" -o tsv 2>$null
+        $target = & $AZ staticwebapp show -n $APP -g $GROUP --query "defaultHostname" -o tsv 2>$null
         if (-not $target) {
             Warn "App '$APP' not found in '$GROUP' - see docs/01-deploy.md step 4"
         } else {
             Ok "Default hostname: $target"
 
-            $hosts = az staticwebapp hostname list -n $APP -g $GROUP --query "[].{name:name,status:status}" -o json 2>$null | ConvertFrom-Json
+            $hosts = & $AZ staticwebapp hostname list -n $APP -g $GROUP --query "[].{name:name,status:status}" -o json 2>$null | ConvertFrom-Json
             if (-not $hosts -or $hosts.Count -eq 0) {
                 Info 'No custom domains configured - see docs/03-custom-domain.md'
             } else {
@@ -128,11 +146,15 @@ Head 'Live site'
 
 function Probe($url) {
     try {
-        $r = Invoke-WebRequest -Uri $url -Method Head -TimeoutSec 15 -ErrorAction Stop
+        $r = Invoke-WebRequest -Uri $url -UseBasicParsing -TimeoutSec 25 -ErrorAction Stop
         Ok "$url -> $($r.StatusCode)"
     } catch {
         $code = $_.Exception.Response.StatusCode.value__
-        if ($code) { Bad "$url -> $code" } else { Bad "$url -> unreachable" }
+        if ($code) {
+            Bad "$url -> $code"
+        } else {
+            Bad "$url -> unreachable ($($_.Exception.Message))"
+        }
     }
 }
 
