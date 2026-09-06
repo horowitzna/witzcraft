@@ -97,6 +97,10 @@ if (-not $GH) {
                     Warn "running: $line"
                 } elseif ($r.conclusion -eq 'success') {
                     Ok $line
+                } elseif ($r.conclusion -eq 'cancelled') {
+                    # Superseded by a newer push. The workflow sets
+                    # cancel-in-progress, so this is expected, not a failure.
+                    Info "superseded: $line"
                 } else {
                     Bad "$($r.conclusion): $line"
                 }
